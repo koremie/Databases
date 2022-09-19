@@ -39,6 +39,11 @@ select speed, avg(price) 'same-speed pc avg price' from pc
 where speed > 600
 group by speed
 order by speed;
+-------- or --------
+select distinct speed, 
+(select avg(price) from pc pc_in where speed = pc.speed) 'same-speed avg price' from pc
+where speed > 600
+order by speed;
 
 -------- 9 --------
 select s.name, c.numGuns, c.bore, c.displacement, c.type, c.country, s.launched, s.class 
