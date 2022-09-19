@@ -14,9 +14,9 @@
 
 **6. Database "Ships".** Get date of battles in the following format: day.month.year
 
-**7. Database "Comp.** firm". Get average PCs' hd of each maker that also produces printers
+**7. Database "Comp. firm".** Get average PCs' hd of each maker that also produces printers
 
-**8. Database "Comp.** firm". Get speed, average price of PCs with same speed value that is greater than 600 MHz
+**8. Database "Comp. firm".** Get speed, average price of PCs with same speed value that is greater than 600 MHz
 
 **9. DB "Ships".** Get name, numGuns, bore, displacement, type, country, launched, class of all ships that satisfy atleast 4 criteria: numGuns=8, bore=15, displacement=32000, type='bb', country='USA', launched=1915, class='Congo'.
 
