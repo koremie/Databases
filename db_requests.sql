@@ -54,12 +54,12 @@ where
 	case when c.class = 'Kon' then 1 else 0 end >= 4;
     
 -------- 10 --------
-select model, avg(price) 'avg price' from laptop
+select p.type, laptop.model, avg(price) 'avg price' from laptop join product p on p.model = laptop.model
 group by model
 union
-select model, avg(price) from pc
+select p.type, pc.model, avg(price) from pc join product p on p.model = pc.model
 group by model
 union
-select model, avg(price) from printer
+select p.type, printer.model, avg(price) from printer join product p on p.model = printer.model
 group by model
-order by 1;
+order by 1,2;
