@@ -15,10 +15,9 @@ join battles btt on ouc.battle = btt.name
 where ouc.result = 'OK';
 
 -------- 4 --------
-select maker, 'Produces both PC and Laptops' produces from product
-where type <> all(select type from product where type not in ('PC', 'Laptop'))
-group by maker
-having count(distinct type) >= 2;
+select distinct maker from product
+where type = 'PC' 
+and not maker <> all(select maker from product where type = 'Laptop');
 
 -------- 5 --------
 select maker from product p join pc on p.model = pc.model
