@@ -13,7 +13,8 @@ from vending_machine
 	join city on city_id = city.id
 	join region on region_id = region.id
 where (sqrt(pow(@latitude - cast(substring_index(gps, ' ', 1) as decimal(5,2)), 2) + pow(@longitude - cast(substring_index(gps, ' ', -1) as decimal(5,2)), 2))) =
-(select min(sqrt(pow(@latitude - cast(substring_index(gps, ' ', 1) as decimal(5,2)), 2) + pow(@longitude - cast(substring_index(gps, ' ', -1) as decimal(5,2)), 2))) from vending_machine);
+(select min(sqrt(pow(@latitude - cast(substring_index(gps, ' ', 1) as decimal(5,2)), 2) + pow(@longitude - cast(substring_index(gps, ' ', -1) as decimal(5,2)), 2))) 
+ 	from vending_machine);
 
 
 -------- #2 get menu of a vending machine --------
@@ -100,13 +101,3 @@ union
 select concat(name, ' ', last_name) from service_staff
 join restock on service_staff_id = service_staff.id
 where menu_vending_machine_id = @machine_id;
-
-
-
-
-
-
-
-
-
-
