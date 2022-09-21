@@ -54,7 +54,6 @@ CREATE TABLE menu (
     snack_id int NOT NULL,
     quantity int NOT NULL,
     price_per_unit decimal(10,5) NOT NULL,
-    id int NOT NULL AUTO_INCREMENT,
     CONSTRAINT menu_pk PRIMARY KEY (vending_machine_id,slot_number)
 );
 
@@ -91,7 +90,7 @@ CREATE TABLE service_staff (
 CREATE TABLE snack (
     id int NOT NULL AUTO_INCREMENT,
     name varchar(60) NOT NULL,
-    net_weight int NOT NULL,
+    net_weight float NOT NULL,
     trademark_name varchar(50) NOT NULL,
     CONSTRAINT snack_pk PRIMARY KEY (id)
 );
