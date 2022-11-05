@@ -1,6 +1,51 @@
 package com.lviv.iot.service;
 
-import com.lviv.iot.domain.Region;
+import java.util.List;
 
-public interface RegionService extends GeneralService<Region, Integer> {
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.lviv.iot.domain.Region;
+import com.lviv.iot.exception.RegionNotFoundException;
+import com.lviv.iot.repository.RegionRepository;
+
+@Service
+public class RegionService implements GeneralService<Region, Integer> {
+    @Autowired
+    RegionRepository regionRepository;
+
+    @Override
+    public List<Region> findAll() {
+        return regionRepository.findAll();
+    }
+
+    @Override
+    public Region findById(Integer id) {
+        return regionRepository.findById(id).orElseThrow(() -> new RegionNotFoundException(id));
+    }
+
+    @Override
+    @Transactional
+    public Region create(Region region) {
+        regionRepository.save(region);
+        return region;
+    }
+
+    @Override
+    @Transactional
+    public void update(Integer id, Region uRegion) {
+        Region region = regionRepository.findById(id).orElseThrow(() -> new RegionNotFoundException(id));
+
+        region.setName(uRegion.getName());
+    }
+
+    @Override
+    @Transactional
+    public void delete(Integer id) {
+        Region region = regionRepository.findById(id).orElseThrow(() -> new RegionNotFoundException(id));
+
+        regionRepository.delete(region);
+    }
 }

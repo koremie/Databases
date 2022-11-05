@@ -1,17 +1,27 @@
 package com.lviv.iot.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
+import java.util.List;
+
+import javax.persistence.*;
+
 @Data
+@Entity
 public class ServiceStaff {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id")
     private Integer id;
+    @Basic
+    @Column(name = "name", length = 50, nullable = false)
     private String name;
-    private String lastName;
-    private String workExperience; 
-    private Boolean isAvailable;
-    private Integer addressId;
+    @Basic
+    @Column(name = "last_name", length = 50, nullable = false)
+    private String Lastname;
+    @ManyToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+    @OneToMany(mappedBy = "serviceStaff")
+    private List<Restock> restocks;
 }

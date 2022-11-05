@@ -1,17 +1,32 @@
 package com.lviv.iot.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
+import java.sql.Date;
+
+import javax.persistence.*;
+
 @Data
+@Entity
 public class Restock {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id")
     private Integer id;
-    private Integer menuVendingMachineId;
-    private Integer menuSlotNumber;
+    @Basic
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
-    private Integer serviceStaffId;
-    private String date;
+    @Basic
+    @Column(name = "date")
+    private Date date;
+
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name="menu_vending_machine_id", referencedColumnName="vending_machine_id"),
+        @JoinColumn(name="menu_slot_number", referencedColumnName="slot_number")
+        })
+    private Menu menu;
+    @ManyToOne
+    @JoinColumn(name = "service_staff_id", referencedColumnName = "id")
+    private ServiceStaff serviceStaff;
 }

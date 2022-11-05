@@ -1,16 +1,25 @@
 package com.lviv.iot.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
+import java.util.List;
+
+import javax.persistence.*;
+
 @Data
+@Entity
 public class Menu {
-    private Integer vendingMachineId;
-    private Integer slotNumber;
-    private Integer snackId;
+    @EmbeddedId
+    private MenuId id;
+    @Basic
+    @Column(name = "quantity")
     private Integer quantity;
-    private Float pricePerUnit;
+    @Basic
+    @Column(name = "price_per_unit")
+    private Integer pricePerUnit;
+    @ManyToOne
+    @JoinColumn(name = "snack_id", referencedColumnName = "id")
+    private Snack snack;
+    @OneToMany(mappedBy = "menu")
+    private List<Restock> restocks;
 }

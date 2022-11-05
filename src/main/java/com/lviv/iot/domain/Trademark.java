@@ -1,12 +1,17 @@
 package com.lviv.iot.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
+import java.util.List;
+
+import javax.persistence.*;
+
 @Data
+@Entity
 public class Trademark {
+    @Id
+    @Column(name = "name", length = 50)
     private String name;
+    @OneToMany(mappedBy = "trademark")
+    private List<Snack> snacks;
 }
