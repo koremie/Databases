@@ -29,8 +29,11 @@ public class TrademarkService implements GeneralService<Trademark, String> {
     @Override
     @Transactional
     public Trademark create(Trademark trademark) {
-        trademarkRepository.save(trademark);
-        return trademark;
+        return new Trademark() {
+            {
+                setName(trademarkRepository.insertIntoTrademark(trademark.getName()));
+            }
+        };
     }
 
     @Override

@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 
 import com.lviv.iot.domain.Address;
 import com.lviv.iot.exception.AddressNotFoundException;
+import com.lviv.iot.exception.CityNotFoundException;
 import com.lviv.iot.repository.AddressRepository;
+import com.lviv.iot.repository.CityRepository;
 
 @Service
 public class AddressService implements GeneralService<Address, Integer> {
     @Autowired
     AddressRepository addressRepository;
+    @Autowired
+    CityRepository cityRepository;
 
     @Override
     public List<Address> findAll() {
@@ -41,7 +45,8 @@ public class AddressService implements GeneralService<Address, Integer> {
         address.setStreet(uAddress.getStreet());
         address.setHouseNumber(uAddress.getHouseNumber());
         address.setAppartmentNumber(uAddress.getAppartmentNumber());
-        address.setCity(uAddress.getCity());
+        address.setCity(cityRepository.findById(uAddress.getCity().getId())
+                .orElseThrow(() -> new CityNotFoundException(uAddress.getCity().getId())));
     }
 
     @Override

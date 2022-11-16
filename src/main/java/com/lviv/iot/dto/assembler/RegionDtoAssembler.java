@@ -19,6 +19,7 @@ public class RegionDtoAssembler implements RepresentationModelAssembler<Region, 
         RegionDto regionDto = RegionDto.builder()
                 .id(entity.getId())
                 .name(entity.getName())
+                .country(entity.getCountry().getName())
                 .build();
         Link selfLink = linkTo(methodOn(RegionController.class).getRegion(regionDto.getId())).withSelfRel();
         regionDto.add(selfLink);

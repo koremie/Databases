@@ -10,11 +10,14 @@ import org.springframework.stereotype.Service;
 import com.lviv.iot.domain.City;
 import com.lviv.iot.exception.CityNotFoundException;
 import com.lviv.iot.repository.CityRepository;
+import com.lviv.iot.repository.RegionRepository;
 
 @Service
 public class CityService implements GeneralService<City, Integer> {
     @Autowired
     CityRepository cityRepository;
+    @Autowired
+    RegionRepository regionRepository;
 
     @Override
     public List<City> findAll() {
@@ -39,7 +42,8 @@ public class CityService implements GeneralService<City, Integer> {
         City city = cityRepository.findById(id).orElseThrow(() -> new CityNotFoundException(id));
 
         city.setName(uCity.getName());
-        city.setRegion(uCity.getRegion());
+        city.setRegion(regionRepository.findById(uCity.getRegion().getId())
+                .orElseThrow(() -> new CityNotFoundException(uCity.getRegion().getId())));
     }
 
     @Override

@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @EqualsAndHashCode(callSuper = false)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Relation(itemRelation = "menu", collectionRelation = "menus")
-public class MenuDto extends RepresentationModel<AddressDto> {
+public class MenuDto extends RepresentationModel<MenuDto> {
     private final Integer vendingMachineId;
     private final Integer slotNumber;
     private final Integer quantity;

@@ -13,9 +13,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Relation(itemRelation = "city", collectionRelation = "cities")
-public class CityDto extends RepresentationModel<CityDto> {
-    private final Integer id;
-    private final String name;
-    private final String region;
+@Relation(itemRelation = "cashWithdrawal", collectionRelation = "cashWithdrawals")
+public class CashWithdrawalDto extends RepresentationModel<CashWithdrawalDto> {
+    private final String serviceMemberName;
+    private final String serviceMemberLastName;
+    private final String vendingMachineModelName;
+    private final Integer amount;
 }

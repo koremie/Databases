@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class Region {
+public class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
@@ -16,9 +16,6 @@ public class Region {
     @Basic
     @Column(name = "name", length = 30, nullable = false)
     private String name;
-    @ManyToOne
-    @JoinColumn(name = "country_id", referencedColumnName = "id")
-    private Country country;
-    @OneToMany(mappedBy = "region")
-    private List<City> cities;
+    @OneToMany(mappedBy = "country")
+    private List<Region> regions;
 }

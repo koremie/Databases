@@ -13,9 +13,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Relation(itemRelation = "city", collectionRelation = "cities")
-public class CityDto extends RepresentationModel<CityDto> {
+@Relation(itemRelation = "country", collectionRelation = "countries")
+public class CountryDto extends RepresentationModel<CountryDto> {
     private final Integer id;
     private final String name;
-    private final String region;
 }

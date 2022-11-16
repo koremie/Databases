@@ -8,13 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lviv.iot.domain.Region;
+import com.lviv.iot.exception.CityNotFoundException;
 import com.lviv.iot.exception.RegionNotFoundException;
+import com.lviv.iot.repository.CountryRepository;
 import com.lviv.iot.repository.RegionRepository;
 
 @Service
 public class RegionService implements GeneralService<Region, Integer> {
     @Autowired
     RegionRepository regionRepository;
+    @Autowired
+    CountryRepository countryRepository;
 
     @Override
     public List<Region> findAll() {
@@ -39,6 +43,8 @@ public class RegionService implements GeneralService<Region, Integer> {
         Region region = regionRepository.findById(id).orElseThrow(() -> new RegionNotFoundException(id));
 
         region.setName(uRegion.getName());
+        region.setCountry(countryRepository.findById(uRegion.getCountry().getId())
+                .orElseThrow(() -> new CityNotFoundException(uRegion.getCountry().getId())));
     }
 
     @Override
